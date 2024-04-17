@@ -1,4 +1,4 @@
-#include "vendedores.h"
+#include "Bajas.h"
 #include "bitacora.h"
 #include<iostream>
 #include<fstream>
@@ -11,7 +11,7 @@
 using namespace std;
 
 
-void vendedores::menu()
+void Bajas::menu()
 {
     int choice;
 	char x;
@@ -66,7 +66,7 @@ void vendedores::menu()
 	}
   }while(choice!= 6);
 }
-void vendedores::insertar()
+void Bajas::insertar()
 {
 	system("cls");
 	fstream file;
@@ -79,7 +79,7 @@ void vendedores::insertar()
 	cout<<"\t\t\tIngresa Telefono Vendedor   : ";
 	cin>>telefono;
 
-	file.open("vendedores.txt", ios::app | ios::out);
+	file.open("Bajas.txt", ios::app | ios::out);
 	file<<std::left<<std::setw(15)<< id <<std::left<<std::setw(15)<< nombre <<std::left<<std::setw(15)<< telefono << "\n";
 	file.close();
 	bitacora auditoria;
@@ -119,14 +119,14 @@ void vendedores::desplegar()
     bitacora auditoria;
     auditoria.insertar("usuario registrado", "701", "SEL");
 }
-void vendedores::modificar()
+void Bajas::modificar()
 {
 	system("cls");
 	fstream file,file1;
 	string participant_id;
 	int found=0;
 	cout<<"\n-------------------------Modificacion Detalles Vendedor-------------------------"<<endl;
-	file.open("vendedores.txt",ios::in);
+	file.open("Bajas.txt",ios::in);
 	if(!file)
 	{
 		cout<<"\n\t\t\tNo hay informacion..,";
@@ -134,7 +134,7 @@ void vendedores::modificar()
 	}
 	else
 	{
-		cout<<"\n Ingrese Id del vendedor que quiere modificar: ";
+		cout<<"\n Ingrese Id que quiere modificar: ";
 		cin>>participant_id;
 		file1.open("temporal.txt",ios::app | ios::out);
 		file >> id >> nombre >> telefono;
@@ -146,11 +146,11 @@ void vendedores::modificar()
 			}
 			else
 			{
-				cout<<"\t\t\tIngrese Id Vendedor: ";
+				cout<<"\t\t\tIngrese Id: ";
 				cin>>id;
-				cout<<"\t\t\tIngrese Nombre Vendedor: ";
+				cout<<"\t\t\tIngrese Nombre: ";
 				cin>>nombre;
-				cout<<"\t\t\tIngrese Telefono Vendedor: ";
+				cout<<"\t\t\tIngrese Telefono: ";
 				cin>>telefono;
 				file1<<std::left<<std::setw(15)<< id <<std::left<<std::setw(15)<< nombre <<std::left<<std::setw(15)<< telefono << "\n";
 				found++;
@@ -160,37 +160,37 @@ void vendedores::modificar()
 		}
 		file1.close();
 		file.close();
-		remove("vendedores.txt");
-		rename("temporal.txt","vendedores.txt");
+		remove("Bajas.txt");
+		rename("temporal.txt","Bajas.txt");
         bitacora auditoria;
         auditoria.insertar("usuario registrado", "701", "UPD");
 	}
 }
-void vendedores::buscar()
+void Bajas::buscar()
 {
 	system("cls");
 	fstream file;
 	int found=0;
-	file.open("vendedores.txt",ios::in);
+	file.open("Bajas.txt",ios::in);
 	if(!file)
 	{
-		cout<<"\n-------------------------Datos del vendedor buscado------------------------"<<endl;
+		cout<<"\n-------------------------Datos buscado------------------------"<<endl;
 		cout<<"\n\t\t\tNo hay informacion...";
 	}
 	else
 	{
 		string participant_id;
-		cout<<"\n-------------------------Datos del vendedor buscado------------------------"<<endl;
-		cout<<"\nIngrese Id del vendedor que quiere buscar: ";
+		cout<<"\n-------------------------Datos del buscado------------------------"<<endl;
+		cout<<"\nIngrese Id del Bajas que quiere buscar: ";
 		cin>>participant_id;
 		file >> id >> nombre >> telefono;
 		while(!file.eof())
 		{
 			if(participant_id==id)
 			{
-				cout<<"\n\n\t\t\t Id Vendedor: "<<id<<endl;
-				cout<<"\t\t\t Nombre Vendedor: "<<nombre<<endl;
-				cout<<"\t\t\t Telefono Vendedor: "<<telefono<<endl;
+				cout<<"\n\n\t\t\t Id Bajas: "<<id<<endl;
+				cout<<"\t\t\t Nombre Bajas: "<<nombre<<endl;
+				cout<<"\t\t\t Telefono Bajas: "<<telefono<<endl;
 				found++;
 			}
 			file >> id >> nombre >> telefono;
@@ -204,14 +204,14 @@ void vendedores::buscar()
         auditoria.insertar("usuario registrado", "701", "SEL");
 	}
 }
-void vendedores::borrar()
+void Bajas::borrar()
 {
 	system("cls");
 	fstream file,file1;
 	string participant_id;
 	int found=0;
-	cout<<"\n-------------------------Detalles Vendedor a Borrar-------------------------"<<endl;
-	file.open("vendedores.txt",ios::in);
+	cout<<"\n-------------------------Detalles a Borrar-------------------------"<<endl;
+	file.open("Bajas.txt",ios::in);
 	if(!file)
 	{
 		cout<<"\n\t\t\tNo hay informacion...";
@@ -219,7 +219,7 @@ void vendedores::borrar()
 	}
 	else
 	{
-		cout<<"\n Ingrese el Id del vendedor que quiere borrar: ";
+		cout<<"\n Ingrese el Id que quiere borrar: ";
 		cin>>participant_id;
 		file1.open("temporal.txt",ios::app | ios::out);
 		file >> id >> nombre >> telefono;
@@ -242,8 +242,8 @@ void vendedores::borrar()
 		}
 		file1.close();
 		file.close();
-		remove("vendedores.txt");
-		rename("temporal.txt","vendedores.txt");
+		remove("Bajas.txt");
+		rename("temporal.txt","Bajas.txt");
         bitacora auditoria;
         auditoria.insertar("usuario registrado", "701", "DEL");
 	}
